@@ -28,9 +28,9 @@
 | genre_id     | integer    | null: false       |
 | status_id    | integer    | null: false       |
 | charge_id    | integer    | null: false       |
-| area_id      | integer    | null: false       |
+| prefecture_id| integer    | null: false       |
 | days_id      | integer    | null: false       |
-| price_id     | integer    | null: false       |
+| price        | integer    | null: false       |
 
 ### Association
 - belongs_to :user
