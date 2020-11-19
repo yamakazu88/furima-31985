@@ -11,7 +11,7 @@
 | last_name          | string  | null: false               |
 | first_name_reading | string  | null: false               |
 | last_name_reading  | string  | null: false               |
-| birth_day          | integer | null: false               |
+| birth_day          | data    | null: false               |
 
 
 ### Association
@@ -20,17 +20,17 @@
 
 ## itemsテーブル
 
-|  Column   |   Type     |  Options                       |
-|-----------|------------|--------------------------------|
-| name      | string     | null: false                    |
-| text      | text       | null: false                    |
-| user      | references | null: false, foreign_key: true |
-| genre     | integer    | null: false, foreign_key: true |
-| status    | integer    | null: false, foreign_key: true |
-| charge    | integer    | null: false, foreign_key: true |
-| area      | integer    | null: false, foreign_key: true |
-| days      | integer    | null: false, foreign_key: true |
-| price     | integer    | null: false                    |
+|  Column      |   Type     |  Options    |
+|--------------|------------|-------------|
+| name         | string     | null: false |
+| text         | text       | null: false |
+| user         | references | null: false |
+| genre_id     | integer    | null: false |
+| status_id    | integer    | null: false |
+| charge_id    | integer    | null: false |
+| area_id      | integer    | null: false |
+| days_id      | integer    | null: false |
+| price_id     | integer    | null: false |
 
 ### Association
 - belongs_to :user
@@ -56,7 +56,7 @@
 | prefecture_id | integer    | null: false                    |
 | city          | string     | null: false                    |
 | house_number  | string     | null: false                    |
-| building_name | string     | null: false                    |
+| building_name | string     |                                |
 | tell          | string     | null: false                    |
 | log           | references | null: false, foreign_key: true |
 
