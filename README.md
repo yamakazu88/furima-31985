@@ -1,24 +1,62 @@
-# README
+# テーブル設計
 
-This README would normally document whatever steps are necessary to get the
-application up and running.
+## usersテーブル
 
-Things you may want to cover:
+|  Column    |  Type   |  Options                  |
+|------------|---------|-------------------------- |
+| nickname   | string  | null: false               |
+| email      | string  | null: false, unique: true |
+| password   | string  | null: false               |
+| first_name | string  | null: false               |
+| last_name  | string  | null: false               |
+| birth_day  | integer | null: false               |
 
-* Ruby version
 
-* System dependencies
+### Association
+- has_many :items
+- has_many :logs
 
-* Configuration
+## itemsテーブル
 
-* Database creation
+|  Column   |   Type     |  Options                       |
+|-----------|------------|--------------------------------|
+| image     | string     | null: false                    |
+| name      | string     | null: false                    |
+| text      | text       | null: false                    |
+| user_id   | references | null: false, foreign_key: true |
+| genre_id  | references | null: false, foreign_key: true |
+| status_id | references | null: false, foreign_key: true |
+| charge_id | references | null: false, foreign_key: true |
+| area_id   | references | null: false, foreign_key: true |
+| days_id   | references | null: false, foreign_key: true |
+| price     | integer    | null: false                    |
 
-* Database initialization
+### Association
+- belongs_to :user
+- has_one    :logs
 
-* How to run the test suite
+## logsテーブル
 
-* Services (job queues, cache servers, search engines, etc.)
+|  Column   |   Type     |  Options                       |
+|-----------|------------|--------------------------------|
+| user_id   | references | null: false, foreign_key: true |
+| item_id   | references | null: false, foreign_key: true |
 
-* Deployment instructions
+### Association
+- belongs_to :user
+- belongs_to :items
+- has_one    :addresses
 
-* ...
+## addressesテーブル
+
+|  Column      |  Type   |  Options    |
+|--------------|---------|------------ |
+| number       | integer | null: false |
+| prefectures  | string  | null: false |
+| municipality | string  | null: false |
+| address      | string  | null: false |
+| tell         | integer | null: false |
+
+
+### Association
+- belongs_to :logs
