@@ -2,14 +2,16 @@
 
 ## usersテーブル
 
-|  Column    |  Type   |  Options                  |
-|------------|---------|-------------------------- |
-| nickname   | string  | null: false               |
-| email      | string  | null: false, unique: true |
-| password   | string  | null: false               |
-| first_name | string  | null: false               |
-| last_name  | string  | null: false               |
-| birth_day  | integer | null: false               |
+|  Column            |  Type   |  Options                  |
+|--------------------|---------|-------------------------- |
+| nickname           | string  | null: false               |
+| email              | string  | null: false, unique: true |
+| encrypted_password | string  | null: false               |
+| first_name         | string  | null: false               |
+| last_name          | string  | null: false               |
+| first_name_reading | string  | null: false               |
+| last_name_reading  | string  | null: false               |
+| birth_day          | integer | null: false               |
 
 
 ### Association
@@ -20,43 +22,43 @@
 
 |  Column   |   Type     |  Options                       |
 |-----------|------------|--------------------------------|
-| image     | string     | null: false                    |
 | name      | string     | null: false                    |
 | text      | text       | null: false                    |
-| user_id   | references | null: false, foreign_key: true |
-| genre_id  | references | null: false, foreign_key: true |
-| status_id | references | null: false, foreign_key: true |
-| charge_id | references | null: false, foreign_key: true |
-| area_id   | references | null: false, foreign_key: true |
-| days_id   | references | null: false, foreign_key: true |
+| user      | references | null: false, foreign_key: true |
+| genre     | integer    | null: false, foreign_key: true |
+| status    | integer    | null: false, foreign_key: true |
+| charge    | integer    | null: false, foreign_key: true |
+| area      | integer    | null: false, foreign_key: true |
+| days      | integer    | null: false, foreign_key: true |
 | price     | integer    | null: false                    |
 
 ### Association
 - belongs_to :user
-- has_one    :logs
+- has_one    :log
 
 ## logsテーブル
 
 |  Column   |   Type     |  Options                       |
 |-----------|------------|--------------------------------|
-| user_id   | references | null: false, foreign_key: true |
-| item_id   | references | null: false, foreign_key: true |
+| user      | references | null: false, foreign_key: true |
+| item      | references | null: false, foreign_key: true |
 
 ### Association
 - belongs_to :user
-- belongs_to :items
-- has_one    :addresses
+- belongs_to :item
+- has_one    :address
 
 ## addressesテーブル
 
-|  Column      |  Type   |  Options    |
-|--------------|---------|------------ |
-| number       | integer | null: false |
-| prefectures  | string  | null: false |
-| municipality | string  | null: false |
-| address      | string  | null: false |
-| tell         | integer | null: false |
-
+|  Column       |  Type      |  Options                       |
+|---------------|------------|--------------------------------|
+| postal_code   | string     | null: false                    |
+| prefecture_id | integer    | null: false                    |
+| city          | string     | null: false                    |
+| house_number  | string     | null: false                    |
+| building_name | string     | null: false                    |
+| tell          | string     | null: false                    |
+| log           | references | null: false, foreign_key: true |
 
 ### Association
-- belongs_to :logs
+- belongs_to :log
