@@ -24,7 +24,7 @@
 |--------------|------------|-------------|
 | name         | string     | null: false |
 | text         | text       | null: false |
-| user         | references | null: false |
+| user         | references |             |
 | genre_id     | integer    | null: false |
 | status_id    | integer    | null: false |
 | charge_id    | integer    | null: false |
@@ -40,8 +40,8 @@
 
 |  Column   |   Type     |  Options                       |
 |-----------|------------|--------------------------------|
-| user      | references | null: false, foreign_key: true |
-| item      | references | null: false, foreign_key: true |
+| user      | references | foreign_key: true              |
+| item      | references | foreign_key: true              |
 
 ### Association
 - belongs_to :user
@@ -58,7 +58,7 @@
 | house_number  | string     | null: false                    |
 | building_name | string     |                                |
 | tell          | string     | null: false                    |
-| log           | references | null: false, foreign_key: true |
+| log           | references | foreign_key: true              |
 
 ### Association
 - belongs_to :log
