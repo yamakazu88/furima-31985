@@ -10,11 +10,11 @@
       <%= image_tag @item.image ,class:"item-box-img" %>
 
       <%# 商品が売れていればsold outを表示しましょう(商品購入機能実装の際にやる) %>
-        <%# unless (もし選択した商品に紐づく購入記録が存在していたら（空ではなかったら）、"sold out"と表示する) %>
-          <%# <div class='sold-out'> %>
-            <%# <span>Sold Out!!</span> %>
-          <%# </div> %>
-        <%# end %>
+        <% if @item.log.present? %>
+          <div class='sold-out'>
+            <span>Sold Out!!</span>
+          </div>
+        <% end %>
       <%# //商品が売れていればsold outを表示しましょう(商品購入機能実装の際にやる) %>
 
     </div>
@@ -32,13 +32,14 @@
       <%= link_to '商品の編集', edit_item_path, method: :get, class: "item-red-btn" %>
       <p class='or-text'>or</p>
       <%= link_to '削除', item_path, method: :delete, class:'item-destroy' %>
+    <% end %>
 
-    <% else %> <%# 商品購入機能実装の際にさらに商品が出品中かどうかの条件分岐を加える %>
+    <% unless @item.log.present? %> 
       <%# 商品が売れていない場合はこちらを表示しましょう %>
       <%= link_to '購入画面に進む', item_logs_path(@item.id) ,class:"item-red-btn"%>
       <%# //商品が売れていない場合はこちらを表示しましょう %>
-
     <% end %>
+    
     <%# //ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
     <div class="item-explain-box">
       <span><%= @item.text %></span>
