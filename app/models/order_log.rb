@@ -1,6 +1,6 @@
 class OrderLog
   include ActiveModel::Model
-  attr_accessor :postal_code, :prefecture, :city, :house_number, :building_name, :tell, :item_id, :user_id
+  attr_accessor :postal_code, :prefecture, :city, :house_number, :building_name, :tell, :item_id, :user_id,:token
   with_options presence: true do
     validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: 'ハイフン含めた8桁の半角数字で入力してください' }
     validates :city
