@@ -7,12 +7,7 @@ class LogsController < ApplicationController
   def create
     @order_log = OrderLog.new(log_params)
     if @order_log.valid?
-      Payjp.api_key = "sk_test_4f3f2f0334ac8c91192a0e77"
-      Payjp::Charge.create(
-        amount: @item.price,
-        card: log_params[:token],
-        currency: 'jpy'
-      )
+      pay_item
       @order_log.save
       redirect_to root_path
     else
@@ -27,5 +22,14 @@ class LogsController < ApplicationController
 
   def item
     @item = Item.find(params[:item_id])
+  end
+
+  def pay_item
+    Payjp.api_key = ENV["PAYJP_SECRET_KEY"]
+    Payjp::Charge.create(
+      amount: @item.price,
+      card: log_params[:token],
+      currency: 'jpy'
+    )
   end
 end
