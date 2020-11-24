@@ -5,10 +5,10 @@ class OrderLog
     validates :postal_code, format: { with: /\A\d{3}[-]\d{4}\z/, message: 'ハイフン含めた8桁の半角数字で入力してください' }
     validates :city
     validates :house_number
-    validates :tell, format: { with: /\d{10}/, message: 'ハイフン含めずに10桁の半角数字で入力してください' }
+    validates :tell, format: { with: /\A\d{10}$|^\d{11}\z/, message: 'ハイフン含めずに11桁以内の半角数字で入力してください' }
   end
 
-  validates :prefecture, numericality: { other_than: 0, message: "can't be blank" }
+  validates :prefecture, numericality: { other_than: 1, message: "can't be blank" }
 
   def save
 
