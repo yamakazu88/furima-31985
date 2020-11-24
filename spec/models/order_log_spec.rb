@@ -37,7 +37,7 @@ RSpec.describe OrderLog, type: :model do
       end
 
       it "prefectureが1だと保存できない" do
-        @order_log.prefecture = "1"
+        @order_log.prefecture = 1
         @order_log.valid?
         expect(@order_log.errors.full_messages).to include("Prefecture can't be blank")
       end
