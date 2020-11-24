@@ -7,7 +7,7 @@ RSpec.describe OrderLog, type: :model do
     end
 
     context "購入がうまくいくとき" do
-      it "必要な項目が存在すると保存できる" do
+      it "必要な項目とtokenが存在すると保存できる" do
         expect(@order_log).to be_valid
       end
 
@@ -76,6 +76,12 @@ RSpec.describe OrderLog, type: :model do
         @order_log.tell = "０９０１２３４５６７８"
         @order_log.valid?
         expect(@order_log.errors.full_messages).to include("Tell ハイフン含めずに11桁以内の半角数字で入力してください")
+      end
+
+      it "tokenが空では登録できないこと" do
+        @order_log.token = nil
+        @order_log.valid?
+        expect(@order_log.errors.full_messages).to include("Token can't be blank")
       end
     end
   end
