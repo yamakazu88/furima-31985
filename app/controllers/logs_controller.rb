@@ -2,7 +2,7 @@ class LogsController < ApplicationController
   before_action :authenticate_user!, only: :index
   before_action :item, only: [:index, :create]
   def index
-    unless current_user.id == @item.user.id
+    if current_user.id == @item.user.id
       redirect_to root_path
     end
     @order_log = OrderLog.new
