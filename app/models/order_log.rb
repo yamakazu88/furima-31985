@@ -6,6 +6,7 @@ class OrderLog
     validates :city
     validates :house_number
     validates :tell, format: { with: /\A\d{10}$|^\d{11}\z/, message: 'ハイフン含めずに11桁以内の半角数字で入力してください' }
+    validates :token
   end
 
   validates :prefecture, numericality: { other_than: 1, message: "can't be blank" }
