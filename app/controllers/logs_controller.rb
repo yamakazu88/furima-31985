@@ -5,9 +5,14 @@ class LogsController < ApplicationController
   end
 
   def create
-    binding.pry
     @order_log = OrderLog.new(log_params)
     if @order_log.valid?
+      Payjp.api_key = "sk_test_4f3f2f0334ac8c91192a0e77"
+      Payjp::Charge.create(
+        amount: @item.price,
+        card: log_params[:token],
+        currency: 'jpy'
+      )
       @order_log.save
       redirect_to root_path
     else
