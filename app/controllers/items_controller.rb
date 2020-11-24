@@ -23,7 +23,7 @@ class ItemsController < ApplicationController
   end
 
   def edit
-    unless current_user.id == @item.user.id || item.log.present?
+    unless current_user.id == @item.user.id || @item.log.present?
       redirect_to root_path
     end
   end
@@ -37,7 +37,7 @@ class ItemsController < ApplicationController
   end
 
   def destroy
-    if current_user.id == @item.user.id || item.log.present?
+    if current_user.id == @item.user.id || @item.log.present?
       @item.destroy
     end
     redirect_to root_path
