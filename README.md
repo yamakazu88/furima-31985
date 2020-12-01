@@ -13,10 +13,13 @@
 | last_name_reading  | string  | null: false               |
 | birth_day          | date    | null: false               |
 
-
 ### Association
 - has_many :items
 - has_many :logs
+- has_many :comments
+- has_many :contacts
+
+
 
 ## itemsテーブル
 
@@ -35,6 +38,9 @@
 ### Association
 - belongs_to :user
 - has_one    :log
+- has_many   :comments
+
+
 
 ## logsテーブル
 
@@ -47,6 +53,8 @@
 - belongs_to :user
 - belongs_to :item
 - has_one    :address
+
+
 
 ## addressesテーブル
 
@@ -62,3 +70,29 @@
 
 ### Association
 - belongs_to :log
+
+
+
+## commentsテーブル
+
+|  Column   |   Type     |  Options          |
+|-----------|------------|-------------------|
+| user      | references | foreign_key: true |
+| item      | references | foreign_key: true |
+| text      | text       | null: false       |
+
+### Association
+- belongs_to :user
+- belongs_to :item
+
+
+
+## contactsテーブル
+
+|  Column   |   Type     |  Options          |
+|-----------|------------|-------------------|
+| user      | references | foreign_key: true |
+| text      | text       | null: false       |
+
+### Association
+- belongs_to :user
