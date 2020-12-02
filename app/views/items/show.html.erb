@@ -30,9 +30,9 @@
     <%# ログインしているユーザーと出品しているユーザーが、同一人物の場合と同一人物ではない場合で、処理を分けましょう %>
     <% if user_signed_in? %>
       <% if current_user.id == @item.user_id && @item.log == nil %>
-        <%= link_to '商品の編集', edit_item_path, method: :get, class: "item-red-btn" %>
+        <%= link_to '商品の編集', edit_item_path(@item.id), method: :get, class: "item-red-btn" %>
         <p class='or-text'>or</p>
-        <%= link_to '削除', item_path, method: :delete, class:'item-destroy' %>
+        <%= link_to '削除', item_path(@item.id), method: :delete, class:'item-destroy' %>
       
       <% elsif @item.log == nil %> <%# 商品購入機能実装の際にさらに商品が出品中かどうかの条件分岐を加える %>
         <%# 商品が売れていない場合はこちらを表示しましょう %>
@@ -87,19 +87,38 @@
   <%# /商品の概要 %>
 
   <div class="comment-box">
-    <form>
-      <textarea class="comment-text"></textarea>
-      <p class="comment-warn">
+    <% if user_signed_in? %>
+      <%= form_with model: [@item, @comment], class: 'form', local: true do |f| %>
+        <%= f.text_area :comment, class:"comment-text" %>
+        <p class="comment-warn">
         相手のことを考え丁寧なコメントを心がけましょう。
         <br>
         不快な言葉遣いなどは利用制限や退会処分となることがあります。
       </p>
-      <button type="submit" class="comment-btn">
-        <%= image_tag "comment.png" ,class:"comment-flag-icon" ,width:"20",height:"25"%>
-        <span>コメントする<span>
-      </button>
-    </form>
+        <%= f.submit "コメントする", class:"comment-btn" %>
+      <% end %>
+    <% else %>
+      <strong><p>※※※ コメントの投稿には新規登録/ログインが必要です ※※※</p>
+      </strong>
+    <% end %>
+
+    <div class="comments">
+    <h4>＜コメント一覧＞</h4>
+      <div class = "comment-list">
+        <% if @comments %>
+          <% @comments.each do |comment| %>
+            <p>
+            <% if comment.id != nil%>
+              <strong><%= link_to comment.user.nickname, "/users/#{comment.user_id}" %>：</strong>
+              <%= comment.comment %>
+            <% end %>
+            </p>
+          <% end %>
+        <% end %>
+      </div>
+    </div>
   </div>
+
   <div class="links">
     <a href="#" class="change-item-btn">
       ＜ 前の商品

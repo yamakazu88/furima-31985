@@ -21,8 +21,8 @@ class ItemsController < ApplicationController
 
   def show
     #コメント機能の実装
-    #@comment = Comment.new
-    #@comments = @item.comments.includes(:user)
+    @comment = Comment.new
+    @comments = @item.comments.includes(:user)
   end
 
   def edit
