@@ -75,11 +75,12 @@
 
 ## commentsテーブル
 
-|  Column   |   Type     |  Options          |
-|-----------|------------|-------------------|
-| user      | references | foreign_key: true |
-| item      | references | foreign_key: true |
-| text      | text       | null: false       |
+|  Column      |   Type     |  Options          |
+|--------------|------------|-------------------|
+| user         | references | foreign_key: true |
+| item         | references | foreign_key: true |
+| comment      | string     | null: false       |
+| delete_check | integer    | default: 0        |
 
 ### Association
 - belongs_to :user
