@@ -1,0 +1,65 @@
+<%= render "shared/header" %>
+
+<div class="main">
+  <div class="inner">
+    <div class="wrapper">
+      <h2 class="page-heading">
+        <%= "#{@nickname}さんの情報" %>
+      </h2>
+      <table class="table">
+        <tbody>
+          <tr>
+            <th class="table__col1">名前</th>
+            <td class="table__col2"><%= @nickname %></td>
+          </tr>
+          <tr>
+            <th class="table__col1">誕生日</th>
+            <td class="table__col2"><%= @birth_day %></td>
+          </tr>
+        </tbody>
+      </table>
+      <h2 class="page-heading">
+        <%= "#{@nickname}さんの出品商品一覧"%>
+      </h2>
+      <div class="item-index">
+        <ul class='user-item-lists'>
+          <% @items.each do |item| %>
+          <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
+            <li class='list'>
+              <%= link_to item_path(item.id) do %>
+              <div class='item-img-content'>
+                <%= image_tag item.image, class: "item-img" %>
+
+                <%# 商品が売れていればsold outを表示しましょう(商品購入機能実装の際にやる) %>
+                <% if item.log.present? %> 
+                  <div class='sold-out'> 
+                    <span>Sold Out!!</span>
+                  </div>
+                <% end %>
+                <%# //商品が売れていればsold outを表示しましょう(商品購入機能実装の際にやる) %>
+
+              </div>
+              <div class='item-info'>
+                <h3 class='item-name'>
+                  <%= item.name %>
+                </h3>
+                <div class='item-price'>
+                  <span><%= item.price %>円<br><%= item.charge.name %></span>
+                  <div class='star-btn'>
+                    <%= image_tag "star.png", class:"star-icon" %>
+                    <span class='star-count'>0</span>
+                  </div>
+                </div>
+              </div>
+              <% end %>
+            </li>
+            <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
+          <% end %>
+        </ul>
+      </div>
+    </div>
+  </div>
+</div>
+
+
+<%= render "shared/footer" %>
