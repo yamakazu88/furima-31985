@@ -27,14 +27,14 @@
   margin-bottom: 5px;
 }
 
-.search-form>.input-box {
+.input-box {
   width: 100%;
   height: 5vh;
   padding-left: 10px;
 }
 
 .search-button {
-  width: 5vh;
+  width: 10vh;
   border: 0;
   cursor: pointer;
   background-color: #3ccace;
@@ -63,6 +63,18 @@
 .category-list {
   text-decoration: none;
   margin-right: 3vw;
+  color: #333333;
+}
+
+.genre-lists {
+  background-color: lightblue;
+  font-size: 15px;
+  margin-left: 2vw;
+  padding-top: 5px;
+}
+
+.genre_id {
+  text-decoration: none;
   color: #333333;
 }
 
@@ -101,4 +113,8 @@
 .sign-up {
   text-decoration: none;
   color: #333333;
+}
+
+.hidden{
+  display: none;
 }

@@ -1,6 +1,7 @@
 class ApplicationController < ActionController::Base
   before_action :basic_auth
   before_action :configure_permitted_parameters, if: :devise_controller?
+  before_action :search_item
 
   private
 
@@ -12,5 +13,9 @@ class ApplicationController < ActionController::Base
 
   def configure_permitted_parameters
     devise_parameter_sanitizer.permit(:sign_up, keys: [:nickname, :first_name, :last_name, :first_name_reading, :last_name_reading, :birth_day])
+  end
+
+  def search_item
+    @p = Item.ransack(params[:q])  # 検索オブジェクトを生成
   end
 end
