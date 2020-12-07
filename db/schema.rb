@@ -10,7 +10,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 2020_12_03_092810) do
+ActiveRecord::Schema.define(version: 2020_12_07_071648) do
 
   create_table "active_storage_attachments", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
@@ -65,6 +65,16 @@ ActiveRecord::Schema.define(version: 2020_12_03_092810) do
     t.index ["user_id"], name: "index_favorites_on_user_id"
   end
 
+  create_table "follow_relationships", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
+    t.bigint "follower_id", null: false
+    t.bigint "following_id", null: false
+    t.datetime "created_at", precision: 6, null: false
+    t.datetime "updated_at", precision: 6, null: false
+    t.index ["follower_id", "following_id"], name: "index_follow_relationships_on_follower_id_and_following_id", unique: true
+    t.index ["follower_id"], name: "index_follow_relationships_on_follower_id"
+    t.index ["following_id"], name: "index_follow_relationships_on_following_id"
+  end
+
   create_table "items", options: "ENGINE=InnoDB DEFAULT CHARSET=utf8", force: :cascade do |t|
     t.string "name", null: false
     t.text "text", null: false
@@ -113,6 +123,8 @@ ActiveRecord::Schema.define(version: 2020_12_03_092810) do
   add_foreign_key "comments", "users"
   add_foreign_key "favorites", "items"
   add_foreign_key "favorites", "users"
+  add_foreign_key "follow_relationships", "users", column: "follower_id"
+  add_foreign_key "follow_relationships", "users", column: "following_id"
   add_foreign_key "items", "users"
   add_foreign_key "logs", "items"
   add_foreign_key "logs", "users"
