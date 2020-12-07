@@ -2,18 +2,19 @@
   min-height: calc(100vh - 161px);
   margin-left: auto;
   margin-right: auto;
+  background-color: white;
 }
 
 .table{
   border-collapse: collapse;
-  margin-bottom: 32px;
+  margin: 32px;
   width: 50%;
 }
 
 .table__col1{
   text-align: left;
   font-weight: bold;
-  background: #fafafa;
+  background-color: #3ccace;
   border-collapse: collapse;
   border: 1px solid #f5f5f5;
   width: 30%;
@@ -24,6 +25,7 @@
   text-align: left;
   border: 1px solid #f5f5f5;
   border-collapse: collapse;
+  background-color: #3ccace;
   width: 70%;
   padding: 16px 8px;
 }
@@ -34,4 +36,49 @@
   flex-wrap: wrap;
   justify-content: space-around;
   padding: auto;
+}
+
+.page-heading{
+  font-size: 20px;
+  margin: 20px;
+}
+
+.follow{
+  display: flex;
+  margin: 20px;
+}
+
+.btn-outline-secondary{
+  border-radius: 40px;
+  width: 15vw;
+  min-width: 200px;
+  color: rgb(249, 75, 0);
+  border: 2px solid #ffb340;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  margin-left: 20px;
+}
+
+.nav-link{
+  margin: 5px;
+}
+
+.star-btn{
+  margin-right: 3px;
+}
+
+.follow-message{
+  font-size: 15px;
+  margin: 0 0 20px 50px;
+}
+
+.mypage{
+  float: right;
+  margin: 0 50px 20px 0;
+}
+
+.nul-list{
+  font-size: 15px;
+  margin: 0 0 20px 50px;
 }

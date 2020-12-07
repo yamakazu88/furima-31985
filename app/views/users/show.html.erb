@@ -4,8 +4,23 @@
   <div class="inner">
     <div class="wrapper">
       <h2 class="page-heading">
-        <%= "#{@nickname}さんの情報" %>
+        <%= "＜#{@nickname}さんの情報＞" %>
       </h2>
+      <div class="follow">
+        <%= link_to "フォロー(#{@user.followings.count})", following_user_path(@user), class: "nav-link" %>
+        <%= link_to "フォロワー(#{@user.followers.count})", followers_user_path(@user), class: "nav-link" %>
+        <div class="follow-btn">
+          <% if user_signed_in? && @user != current_user%>
+            <div id="follow_form">
+              <% if current_user.following?(@user) %>
+                <%= render "unfollow" %>
+              <% else %>
+                <%= render "follow" %>
+              <% end %>
+            </div>
+          <% end %>
+        </div>
+      </div>
       <table class="table">
         <tbody>
           <tr>
@@ -19,81 +34,90 @@
         </tbody>
       </table>
       <h2 class="page-heading">
-        <%= "#{@nickname}さんの出品商品一覧"%>
+        <%= "＜#{@nickname}さんの出品商品一覧＞"%>
       </h2>
-      <div class="item-index">
-        <ul class='user-item-lists'>
-          <% @items.each do |item| %>
-          <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
-            <li class='list'>
-              <%= link_to item_path(item.id) do %>
-              <div class='item-img-content'>
-                <%= image_tag item.image, class: "item-img" %>
+      <% if @items.any? %>
+        <div class="item-index">
+          <ul class='user-item-lists'>
+            <% @items.each do |item| %>
+            <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
+              <li class='list'>
+                <%= link_to item_path(item.id) do %>
+                <div class='item-img-content'>
+                  <%= image_tag item.image, class: "item-img" %>
 
-                <%# 商品が売れていればsold outを表示しましょう(商品購入機能実装の際にやる) %>
-                <% if item.log.present? %> 
-                  <div class='sold-out'> 
-                    <span>Sold Out!!</span>
-                  </div>
-                <% end %>
-                <%# //商品が売れていればsold outを表示しましょう(商品購入機能実装の際にやる) %>
+                  <%# 商品が売れていればsold outを表示しましょう(商品購入機能実装の際にやる) %>
+                  <% if item.log.present? %> 
+                    <div class='sold-out'> 
+                      <span>Sold Out!!</span>
+                    </div>
+                  <% end %>
+                  <%# //商品が売れていればsold outを表示しましょう(商品購入機能実装の際にやる) %>
 
-              </div>
-              <div class='item-info'>
-                <h3 class='item-name'>
-                  <%= item.name %>
-                </h3>
-                <div class='item-price'>
-                  <span><%= item.price %>円<br><%= item.charge.name %><br>出品者：<%= item.user.nickname%></span>
-                  <div class='star-btn'>
-                    <i class="far fa-heart star-btn"></i>
-                    <%= item.favorites.count %>
+                </div>
+                <div class='item-info'>
+                  <h3 class='item-name'>
+                    <%= item.name %>
+                  </h3>
+                  <div class='item-price'>
+                    <span><%= item.price %>円<br><%= item.charge.name %><br>出品者：<%= item.user.nickname%></span>
+                    <div class='star-btn'>
+                      <i class="far fa-heart star-btn"></i>
+                      <%= item.favorites.count %>
+                    </div>
                   </div>
                 </div>
-              </div>
-              <% end %>
-            </li>
-            <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
-          <% end %>
-        </ul>
-      </div>
+                <% end %>
+              </li>
+              <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
+            <% end %>
+          </ul>
+        </div>
+      <% else %>
+        <h3 class="nul-list">出品された商品はありません</h3>
+      <% end %>
+
       <% if user_signed_in? %>
         <% if current_user.id == @user.id %>
           <h2 class="page-heading">
-            <%= "#{@nickname}さんのお気に入り商品一覧"%>
+            <%= "＜#{@nickname}さんのお気に入り商品一覧＞"%>
           </h2>
-          <div class="item-index">
-            <ul class='user-item-lists'>
-              <% @favorites.each do |favorite| %>
-              <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
-                <li class='list'>
-                  <%= link_to item_path(favorite.item.id) do %>
-                  <div class='item-img-content'>
-                    <%= image_tag favorite.item.image, class: "item-img" %>
+          <% if @favorites.any? %>
+            <div class="item-index">
+              <ul class='user-item-lists'>
+                <% @favorites.each do |favorite| %>
+                <%# 商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
+                  <li class='list'>
+                    <%= link_to item_path(favorite.item.id) do %>
+                    <div class='item-img-content'>
+                      <%= image_tag favorite.item.image, class: "item-img" %>
 
-                    <%# 商品が売れていればsold outを表示しましょう(商品購入機能実装の際にやる) %>
-                    <% if favorite.item.log.present? %> 
-                      <div class='sold-out'> 
-                        <span>Sold Out!!</span>
-                      </div>
-                    <% end %>
-                    <%# //商品が売れていればsold outを表示しましょう(商品購入機能実装の際にやる) %>
+                      <%# 商品が売れていればsold outを表示しましょう(商品購入機能実装の際にやる) %>
+                      <% if favorite.item.log.present? %> 
+                        <div class='sold-out'> 
+                          <span>Sold Out!!</span>
+                        </div>
+                      <% end %>
+                      <%# //商品が売れていればsold outを表示しましょう(商品購入機能実装の際にやる) %>
 
-                  </div>
-                  <div class='item-info'>
-                    <h3 class='item-name'>
-                      <%= favorite.item.name %>
-                    </h3>
-                    <div class='item-price'>
-                      <span><%= favorite.item.price %>円<br><%= favorite.item.charge.name %><br>出品者：<%= @user.nickname%></span>
                     </div>
-                  </div>
-                  <% end %>
-                </li>
-                <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
-              <% end %>
-            </ul>
-          </div>
+                    <div class='item-info'>
+                      <h3 class='item-name'>
+                        <%= favorite.item.name %>
+                      </h3>
+                      <div class='item-price'>
+                        <span><%= favorite.item.price %>円<br><%= favorite.item.charge.name %><br>出品者：<%= @user.nickname%></span>
+                      </div>
+                    </div>
+                    <% end %>
+                  </li>
+                  <%# //商品のインスタンス変数になにか入っている場合、中身のすべてを展開できるようにしましょう %>
+                <% end %>
+              </ul>
+            </div>
+          <% else %>
+            <h3 class="nul-list">いいねした商品はありません</h3>
+          <% end %>
         <% end %>
       <% end %>
     </div>

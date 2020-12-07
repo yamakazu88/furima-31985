@@ -1,0 +1,23 @@
+<%= render "shared/header" %>
+
+<h2 class="page-heading">
+  <%= "＜#{@user.nickname}さんがフォローしているユーザー一覧＞" %>
+</h2>
+
+<% if @users.any? %>
+  <table class="table">
+    <% @users.each do |user| %>
+      <tbody>
+        <tr>
+          <th class="table__col1">ユーザー名</th>
+          <td class="table__col2"><%= link_to "#{user.nickname}", "/users/#{user.id}" %></td>
+        </tr>
+      </tbody>
+    <% end %>
+  </table>
+<% else %>
+  <h3 class="follow-message">フォローしているユーザーはいません</h1>
+<% end %>
+<%= link_to 'マイページへ戻る', "/users/#{@user.id}", class: "mypage" %>
+
+<%= render "shared/footer" %>
