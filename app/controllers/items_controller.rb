@@ -47,6 +47,10 @@ class ItemsController < ApplicationController
     redirect_to root_path
   end
 
+  def search
+    @items = @p.result  # 検索条件にマッチした商品の情報を取得
+  end
+
    private
   def item_params
     params.require(:item).permit(:name, :text, :genre_id, :status_id, :charge_id, :prefecture_id, :day_id, :price, :image).merge(user_id: current_user.id)
@@ -55,4 +59,6 @@ class ItemsController < ApplicationController
   def set_item
     @item = Item.find(params[:id])
   end
+
+  
 end
