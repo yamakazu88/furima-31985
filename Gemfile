@@ -81,3 +81,6 @@ gem 'payjp'
 gem "aws-sdk-s3", require: false
 
 gem 'ransack'
+
+gem 'jquery-rails'
+gem 'jquery-turbolinks'
