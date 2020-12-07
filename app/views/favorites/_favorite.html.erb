@@ -1,0 +1,11 @@
+<% if current_user.already_favorited?(@item) %>
+  <%= button_to item_favorite_path(@item), class:"btn", method: :delete do %>
+    <i class="fas fa-heart unlike-btn"></i> <%= @item.favorites.count %>
+  <% end %>
+  <%#<button type="button" id="btn" class="btn" ><%= @item.favorites.count%> <%#いいね外す</button>%>
+<% else %>
+  <%= button_to item_favorites_path(@item), class:"btn", method: :post do %>
+    <i class="far fa-heart like-btn"></i> <%= @item.favorites.count %>
+  <% end %>
+  <%#<button type="button" id="btn" class="btn" ><%= @item.favorites.count%> <%#いいね</button>%>
+<% end %>

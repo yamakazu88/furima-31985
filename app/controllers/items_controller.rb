@@ -23,6 +23,7 @@ class ItemsController < ApplicationController
     #コメント機能の実装
     @comment = Comment.new
     @comments = @item.comments.includes(:user)
+    @favorite = Favorite.new
   end
 
   def edit

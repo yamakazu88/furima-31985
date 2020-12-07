@@ -6,6 +6,13 @@ class User < ApplicationRecord
   has_many :logs
   has_many :comments
 
+  has_many :favorites, dependent: :destroy
+  has_many :favorites_items, through: :favorites, source: :item
+
+  def already_favorited?(item)
+    self.favorites.exists?(item_id: item.id)
+  end
+  
   with_options presence: true do
     validates :nickname
     validates :birth_day
