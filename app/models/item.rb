@@ -5,6 +5,10 @@ class Item < ApplicationRecord
   has_one          :log
   has_many         :comments, dependent: :destroy
 
+  has_many         :favorites
+  has_many         :favorites_users, through: :favorites, source: :user
+
+
   extend ActiveHash::Associations::ActiveRecordExtensions
   belongs_to_active_hash :genre
   belongs_to_active_hash :status

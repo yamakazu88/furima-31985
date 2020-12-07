@@ -116,6 +116,31 @@
   margin-right: 20px;
 }
 
+.btn{
+  border: none;
+  background-color: white;
+}
+
+.like-btn {
+  width: 25px;
+  height: 30px;
+  font-size: 25px;
+  color: #e54747; 
+  }
+ 
+ .unlike-btn {
+  width: 25px;
+  height: 30px;
+  font-size: 25px;
+  color: #e54747;
+  }
+
+.favorite-btn-text{
+  background-color: white;
+  border: none;
+  font-size: 20px;
+}
+
 .favorite-star-icon {
   margin-right: 5px;
 }
