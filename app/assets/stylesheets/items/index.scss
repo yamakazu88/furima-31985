@@ -296,16 +296,15 @@ a {
 .star-btn {
   display: flex;
   align-items: center;
-}
-
-.star-icon {
-  height: 2vh;
-  width: 2vh;
-  margin-right: 0.5vw;
+  width: 15px;
+  height: 20px;
+  font-size: 15px;
+  color: #e54747; 
 }
 
 .star-count {
   font-size: 2vh;
+  margin-left: 5px;
 }
 
 /* //商品一覧 */
