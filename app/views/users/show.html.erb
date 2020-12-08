@@ -106,7 +106,11 @@
                         <%= favorite.item.name %>
                       </h3>
                       <div class='item-price'>
-                        <span><%= favorite.item.price %>円<br><%= favorite.item.charge.name %><br>出品者：<%= @user.nickname%></span>
+                        <span><%= favorite.item.price %>円<br><%= favorite.item.charge.name %><br>出品者：<%= favorite.item.user.nickname%></span>
+                        <div class='star-btn'>
+                          <i class="far fa-heart star-btn"></i>
+                          <%= favorite.item.favorites.count %>
+                        </div>
                       </div>
                     </div>
                     <% end %>
