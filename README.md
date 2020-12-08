@@ -89,10 +89,9 @@
 
 ## contactsテーブル
 
-|  Column   |   Type     |  Options          |
-|-----------|------------|-------------------|
-| user      | references | foreign_key: true |
-| text      | text       | null: false       |
+|  Column   |   Type     | Options |
+|-----------|------------|---------|
+| name      | string     |         |
+| email     | string     |         |
+| message   | text       |         |
 
-### Association
-- belongs_to :user

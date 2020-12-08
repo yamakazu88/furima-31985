@@ -1,0 +1,33 @@
+.page-header{
+  font-size: 25px;
+  margin-left: 10px;
+}
+
+.table-box{
+  display: flex;
+  margin: 10px 20px;
+}
+
+.table-name{
+  width: 15vw;
+}
+
+.table-form{
+  width: 25vw;
+}
+
+.btn-primary{
+  border: 1px solid #3ccace;
+  background-color: white;
+  width: 50px;
+  margin-left: 20px;
+}
+
+.alert-danger{
+  color: red;
+  margin-left: 20px;
+}
+
+.thank-message{
+  margin: 20px 50px;
+}
