@@ -86,3 +86,5 @@ gem 'jquery-rails'
 gem 'jquery-turbolinks'
 
 gem 'kaminari'
+
+gem 'dotenv-rails'

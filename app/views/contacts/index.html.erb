@@ -1,0 +1,36 @@
+<%= render "shared/header" %>
+
+<%= form_for @contact, :url => contacts_confirm_path do |f| %>
+  <div class="page-header">
+    <h1>お問い合わせ</h1>
+  </div>
+
+  <% if @contact.errors.any? %>
+    <div class="alert-danger" role="alert">
+      <strong>入力内容にエラーがあります</strong>
+      <ul>
+        <% @contact.errors.each do |attr, msg| %>
+          <li><%= msg %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <table class="table">
+    <tr class="table-box">
+      <th class="table-name">名前<span class="text-danger">（必須）</span></th>
+      <td><%= f.text_field :name, class: "table-form" %></td>
+    </tr>
+    <tr class="table-box">
+      <th class="table-name">メールアドレス<span class="text-danger">（必須）</span></th>
+      <td><%= f.text_field :email, class: "table-form" %></td>
+    </tr>
+    <tr class="table-box">
+      <th class="table-name">お問い合わせ内容</th>
+      <td><%= f.text_area :message, class: "table-form" %></td>
+    </tr>
+  </table>
+  <%= f.submit '確認', class: 'btn-primary' %>
+<% end %>
+
+<%= render "shared/footer" %>

@@ -1,0 +1,34 @@
+<%= render "shared/header" %>
+
+<div class="page-header">
+  <h1>お問い合わせ</h1>
+</div>
+
+<%= form_for @contact, :url => contacts_thanks_path do |f| %>
+  <table class="table">
+    <tr class="table-box">
+      <th class="table-name">名前</th>
+      <td>
+        <%= f.hidden_field :name, class: "table-form" %>
+        <%= @contact.name %>
+      </td>
+    </tr>
+    <tr class="table-box">
+      <th class="table-name">メールアドレス</th>
+      <td>
+        <%= f.hidden_field :email, class: "table-form" %>
+        <%= @contact.email %>
+      </td>
+    </tr>
+    <tr class="table-box">
+      <th class="table-name">お問い合わせ内容</th>
+      <td>
+        <%= f.hidden_field :message, class: "table-form" %>
+        <%= simple_format(@contact.message) %>
+      </td>
+    </tr>
+  </table>
+  <%= f.submit '送信', :class => 'btn-primary' %>
+<% end %>
+
+<%= render "shared/footer" %>
